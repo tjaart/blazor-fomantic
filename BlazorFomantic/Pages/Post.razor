@@ -1,0 +1,40 @@
+@page "/posts/{fileName}"
+@using Markdig
+@using Markdig.SemanticUi
+@using System.Net
+@using Markdig.SyntaxHighlighting
+@inject HttpClient Http
+
+<UiSegment>
+    @postText
+</UiSegment>
+
+
+@code {
+    [Parameter]
+    public string FileName { get; set; }
+
+    private MarkupString postText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        postText = await LoadPost(FileName);
+        StateHasChanged();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<MarkupString> LoadPost(string postFile)
+    {
+        var pipeline = new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .UseEmojiAndSmiley()
+            .UseSyntaxHighlighting()
+            .UseSemanticUi()
+            .Build();
+        
+        var text =    await Http.GetStringAsync($"/blog_data/posts/{FileName}.md");
+        Console.WriteLine(text);
+        var html = Markdig.Markdown.ToHtml(text, pipeline);
+      return (MarkupString)html; // or new MarkupString(html)
+    }
+}

@@ -1,0 +1,51 @@
+@page "/blog"
+@using Markdig
+@using Markdig.SemanticUi
+@inject HttpClient Http
+
+<UiSegment>
+    @if (posts == null)
+    {
+        <div class="ui active inverted dimmer">
+            <div class="ui text loader">Loading</div>
+            <p></p>
+        </div>
+    }
+    else
+    {
+        <div class="ui relaxed divided list">
+            @foreach (var post in posts)
+            {
+                <div class="item">
+                    <div class="content">
+                        <a class="header" href="/posts/@post.File">@post.Title</a>
+                        <div class="description">@post.Date</div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+</UiSegment>
+
+@code {
+
+    public class BlogPost
+    {
+        public string Title { get; set; }
+        public string File { get; set; }
+        public string Date { get; set; }
+    }
+
+
+    BlogPost[] posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //await Task.Delay(TimeSpan.FromSeconds(10));
+        posts = await Http.GetFromJsonAsync<BlogPost[]>("/blog_data/posts.json");
+    }
+
+    
+
+}

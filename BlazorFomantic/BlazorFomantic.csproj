@@ -5,6 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Markdig" Version="0.24.0" />
+        <PackageReference Include="Markdig.SyntaxHighlighting" Version="1.1.7" />
+        <PackageReference Include="MarkdownSharp" Version="2.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.5" PrivateAssets="all" />
         <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
@@ -13,6 +16,15 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
       <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+      <_ContentIncludedByDefault Remove="Blog\posts.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Blog\Posts\make_it_count.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="wwwroot\blog_data\posts\make_it_count.md" />
     </ItemGroup>
 
 </Project>

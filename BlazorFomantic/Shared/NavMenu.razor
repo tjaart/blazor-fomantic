@@ -1,1 +1,34 @@
-﻿<h3>NAV</h3>
+﻿<div class="ui vertical menu">
+  <NavLink ActiveClass="active" class="item" Match="NavLinkMatch.All" href="/">
+    home
+  </NavLink>
+  <NavLink class="item" href="/about">
+    about
+  </NavLink>
+  <NavLink class="item" href="/blog">
+    <i class="gamepad icon"></i>
+    blog
+  </NavLink>
+</div>
+
+@code
+{
+  private int _num { get; set; }= 0;
+  protected override Task OnInitializedAsync()
+  {
+    //StartCounter();
+    
+    
+    return base.OnInitializedAsync();
+  }
+
+  private async Task StartCounter()
+  {
+    
+    await Task.Delay(1000);
+    _num++;
+    StateHasChanged();
+    await StartCounter();
+    
+  }
+}

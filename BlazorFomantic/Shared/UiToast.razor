@@ -1,0 +1,21 @@
+@inject IJSRuntime JS;
+
+@code {
+
+    public async Task ShowToast(string message)
+    {
+        await JS.InvokeVoidAsync("showToast", message);
+    }
+    
+    public async Task ShowToast(ToastData message)
+    {
+        await JS.InvokeVoidAsync("showToast", message);
+    }
+
+    public class ToastData
+    {
+        public string Message { get; set; }
+        public string Title { get; set; }
+    }
+
+}

@@ -1,16 +1,21 @@
 ﻿@inherits LayoutComponentBase
-<div class="container">
-    <header>
-        Fomantic UI With Blazor
-    </header>
-
-    <main>
-        @Body
-    </main>
-    <aside>
-        <NavMenu/>
-    </aside>
-    <footer>
-        Footer
-    </footer>
+<div class="ui vertically divided grid">
+    <div class="three column row">
+        <div class="column"></div>
+        <div class="column">
+            <h1>Fomantic UI With Blazor</h1>
+        </div>
+        <div class="column"></div>
+    </div>
+    <div class="three column row">
+        <div class="column">
+            <p></p>
+        </div>
+        <div class="column">
+            @Body
+        </div>
+        <div class="column">
+            <NavMenu/>
+        </div>
+    </div>
 </div>

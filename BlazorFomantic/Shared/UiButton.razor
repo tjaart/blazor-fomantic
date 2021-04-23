@@ -1,0 +1,16 @@
+@using Microsoft.AspNetCore.Components.Rendering
+<button @onclick="Clicked" class="ui button">@Text</button>
+
+@code {
+    
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public Func<Task> Clicked { get; set; }
+
+    public void Test(RenderTreeBuilder __builder)
+    {
+        <p>HI</p>
+    }
+}

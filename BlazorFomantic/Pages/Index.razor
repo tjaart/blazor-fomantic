@@ -1,28 +1,34 @@
 ﻿@page "/"
 
-
-
 <UiSegment Build="@BuildTitleSegment">
     <h3>This is a segment</h3>
+    <hr/>
+    <p>
+        Welcome to the world of doing things.
+    </p>
 </UiSegment>
 
-<UiSegment @ref="_anotherSegment" Build="@BuildSegment">
-    This is another segment
-</UiSegment>
+<UiToast @ref=_toastRef></UiToast>
 
 @code
 {
-    public async Task BuildSegment(SegmentBuilder builder)
-    {
-        builder.Raise()
-            .WithEmphasis(SegmentEmphasis.Secondary);
-    }
-
     private UiSegment _anotherSegment;
 
     public async Task BuildTitleSegment(SegmentBuilder segmentBuilder)
     {
-        segmentBuilder.Disable();
+        segmentBuilder.Raise();
     }
+
+    public async Task ClickedClickMe()
+    {
+        Console.WriteLine("Hello");
+        await _toastRef.ShowToast(new UiToast.ToastData
+        {
+            Message = "I am a serialized toast message",
+            Title = "With a title!"
+        });
+    }
+
+    private UiToast _toastRef;
 }
 
