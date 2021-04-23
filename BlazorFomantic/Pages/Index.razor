@@ -1,7 +1,28 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+<UiSegment Build="@BuildTitleSegment">
+    <h3>This is a segment</h3>
+</UiSegment>
+
+<UiSegment @ref="_anotherSegment" Build="@BuildSegment">
+    This is another segment
+</UiSegment>
+
+@code
+{
+    public async Task BuildSegment(SegmentBuilder builder)
+    {
+        builder.Raise()
+            .WithEmphasis(SegmentEmphasis.Secondary);
+    }
+
+    private UiSegment _anotherSegment;
+
+    public async Task BuildTitleSegment(SegmentBuilder segmentBuilder)
+    {
+        segmentBuilder.Disable();
+    }
+}
+

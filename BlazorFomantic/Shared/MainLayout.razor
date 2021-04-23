@@ -1,17 +1,16 @@
 ﻿@inherits LayoutComponentBase
+<div class="container">
+    <header>
+        Fomantic UI With Blazor
+    </header>
 
-<div class="page">
-    <div class="sidebar">
+    <main>
+        @Body
+    </main>
+    <aside>
         <NavMenu/>
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
+    </aside>
+    <footer>
+        Footer
+    </footer>
 </div>
