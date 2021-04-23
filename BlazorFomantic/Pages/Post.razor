@@ -6,7 +6,38 @@
 @inject HttpClient Http
 
 <UiSegment>
-    @postText
+    @if (loaded) 
+    {
+        @postText    
+    }
+    else
+    {
+        <div class="ui placeholder">
+            <div class="header">
+                 <div class="line"></div>
+            </div>
+            <div class="paragraph">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="paragraph">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="paragraph">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    }
+    
 </UiSegment>
 
 
@@ -15,10 +46,12 @@
     public string FileName { get; set; }
 
     private MarkupString postText;
+    private bool loaded = false;
 
     protected override async Task OnInitializedAsync()
     {
         postText = await LoadPost(FileName);
+        loaded = true;
         StateHasChanged();
         await base.OnInitializedAsync();
     }
@@ -35,6 +68,7 @@
         var text =    await Http.GetStringAsync($"/blog_data/posts/{FileName}.md");
         Console.WriteLine(text);
         var html = Markdig.Markdown.ToHtml(text, pipeline);
+        
       return (MarkupString)html; // or new MarkupString(html)
     }
 }

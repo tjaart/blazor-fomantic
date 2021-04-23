@@ -1,34 +1,19 @@
 ﻿<div class="ui vertical menu">
-  <NavLink ActiveClass="active" class="item" Match="NavLinkMatch.All" href="/">
-    home
-  </NavLink>
-  <NavLink class="item" href="/about">
-    about
-  </NavLink>
-  <NavLink class="item" href="/blog">
-    <i class="gamepad icon"></i>
-    blog
-  </NavLink>
+    <NavLink ActiveClass="active" class="item" Match="NavLinkMatch.All" href="/">
+        <i class="home teal icon"></i>
+        Home
+    </NavLink>
+    <NavLink class="item" href="/blog">
+        <i class="book open olive icon"></i>
+        Blog
+    </NavLink>
+    <NavLink class="item" href="/about">
+        <i class="question icon"></i>
+        About
+    </NavLink>
+
 </div>
 
 @code
 {
-  private int _num { get; set; }= 0;
-  protected override Task OnInitializedAsync()
-  {
-    //StartCounter();
-    
-    
-    return base.OnInitializedAsync();
-  }
-
-  private async Task StartCounter()
-  {
-    
-    await Task.Delay(1000);
-    _num++;
-    StateHasChanged();
-    await StartCounter();
-    
-  }
 }
