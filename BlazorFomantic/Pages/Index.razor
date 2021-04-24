@@ -6,7 +6,42 @@
     <p>
         Welcome to the world of doing things.
     </p>
+
+    <UiSegment Build="@BuildSubSegment">
+        <h4>What to do?</h4>
+
+        <EditForm Model="model" class="ui form">
+            <UiTextBox Label="Title" Name="first-name" @bind-Value="@model.Description"/>
+            <UiTextBox Label="Details" Name="first-name" @bind-Value="@model.Title"/>
+            <UiButton Primary="true" Text="Add" Clicked="ClickedClickMe"></UiButton>
+        </EditForm>
+
+
+    </UiSegment>
+
+    <UiSegment>
+        <EditForm Model="thingsToDo" class="ui form">
+            <div class="ui list">
+                @foreach (var todoItem in thingsToDo)
+                {
+                    <a class="item">
+
+                        <div class="content">
+                            <div class="header">
+                                <UiCheckBox @bind-Value="@todoItem.Done"></UiCheckBox>@todoItem.Title
+                            </div>
+                            <div class="description">@todoItem.Description</div>
+                        </div>
+                    </a>
+                }
+
+            </div>
+
+        </EditForm>
+    </UiSegment>
+
 </UiSegment>
+
 
 <UiToast @ref=_toastRef></UiToast>
 
@@ -14,21 +49,49 @@
 {
     private UiSegment _anotherSegment;
 
+    List<TodoItem> thingsToDo = new();
+
+    private class TodoItem
+    {
+        public bool Done { get; set; }
+        public string Description { get; set; }
+        public string? Title { get; set; }
+    }
+
+
+    TodoItem model = new();
+
     public async Task BuildTitleSegment(SegmentBuilder segmentBuilder)
     {
         segmentBuilder.Raise();
     }
 
+    public async Task BuildSubSegment(SegmentBuilder segmentBuilder)
+    {
+        segmentBuilder.WithEmphasis(SegmentEmphasis.Secondary);
+    }
+
     public async Task ClickedClickMe()
     {
-        Console.WriteLine("Hello");
+        thingsToDo.Add(model);
         await _toastRef.ShowToast(new UiToast.ToastData
         {
-            Message = "I am a serialized toast message",
-            Title = "With a title!"
+            Message = $"{model.Description}",
+            Title = "Added Item!",
+            ShowProgress = "bottom"
         });
+        model = new();
     }
 
     private UiToast _toastRef;
-}
 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}
