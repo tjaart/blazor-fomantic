@@ -1,6 +1,6 @@
 namespace Markdig.SemanticUi
 {
-    public static class SyntaxHighlightingExtensions
+    public static class SemanticUiExtensions
     {
         public static MarkdownPipelineBuilder UseSemanticUi(this MarkdownPipelineBuilder pipeline)
         {

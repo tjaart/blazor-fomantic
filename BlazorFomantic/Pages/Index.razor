@@ -21,14 +21,14 @@
 
     <UiSegment>
         <EditForm Model="thingsToDo" class="ui form">
-            <div class="ui list">
+            <div class="ui divided list">
                 @foreach (var todoItem in thingsToDo)
                 {
                     <a class="item">
 
                         <div class="content">
                             <div class="header">
-                                <UiCheckBox @bind-Value="@todoItem.Done"></UiCheckBox>@todoItem.Title
+                                <UiCheckBox @bind-Value="@todoItem.Done" Label="@todoItem.Title"></UiCheckBox>
                             </div>
                             <div class="description">@todoItem.Description</div>
                         </div>
@@ -63,7 +63,7 @@
 
     public async Task BuildTitleSegment(SegmentBuilder segmentBuilder)
     {
-        segmentBuilder.Raise();
+        //segmentBuilder.Raise();
     }
 
     public async Task BuildSubSegment(SegmentBuilder segmentBuilder)

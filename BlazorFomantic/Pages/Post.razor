@@ -1,8 +1,8 @@
 @page "/posts/{fileName}"
 @using Markdig
 @using Markdig.SemanticUi
-@using System.Net
-@using Markdig.SyntaxHighlighting
+@using MarkdigHighlighting
+
 @inject HttpClient Http
 
 <UiSegment>
@@ -62,8 +62,8 @@
         var pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
             .UseEmojiAndSmiley()
-            .UseSyntaxHighlighting()
             .UseSemanticUi()
+           .UseSyntaxHighlighting()
             .Build();
 
         var text = await Http.GetStringAsync($"/blog_data/posts/{FileName}.md");
