@@ -12,7 +12,7 @@
 
         <EditForm Model="model" class="ui form">
             <UiTextBox Label="Title" Name="first-name" @bind-Value="@model.Description"/>
-            <UiTextBox Label="Details" Name="first-name" @bind-Value="@model.Title"/>
+          
             <UiButton Primary="true" Text="Add" Clicked="ClickedClickMe"></UiButton>
         </EditForm>
 
@@ -28,9 +28,9 @@
 
                         <div class="content">
                             <div class="header">
-                                <UiCheckBox @bind-Value="@todoItem.Done" Label="@todoItem.Title"></UiCheckBox>
+                                <UiCheckBox @bind-Value="@todoItem.Done" Label="@todoItem.Description"></UiCheckBox>
                             </div>
-                            <div class="description">@todoItem.Description</div>
+                            
                         </div>
                     </a>
                 }
@@ -54,8 +54,8 @@
     private class TodoItem
     {
         public bool Done { get; set; }
-        public string Description { get; set; }
-        public string? Title { get; set; }
+        
+        public string? Description { get; set; }
     }
 
 
